@@ -8,7 +8,7 @@ import (
 	"github.com/neo4j/neo4j-go-driver/neo4j"
 )
 
-var auth = neo4j.BasicAuth("neo4j", "neo4j", "")
+var auth = neo4j.BasicAuth("neo4j", "secretpassword", "")
 
 func testNeoDriver() error {
 	var (
@@ -55,6 +55,10 @@ func indexHandler(rw http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
+	if err := testNeoDriver(); err != nil {
+		panic(err)
+	}
+
 	fmt.Println("initializing graphql")
 	if err := InitializeSchema(); err != nil {
 		panic(err)
