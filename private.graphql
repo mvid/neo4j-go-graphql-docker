@@ -1,0 +1,14 @@
+type Query {
+    Document(email: String!): [Document] @cypher(statement: "MATCH (u:User {email: $email})-[:OWNS_DOCUMENT]->(d:Document) RETURN d")
+}
+
+
+type User {
+    email: String!
+    documents: [Document] @relation(name:"OWNS_DOCUMENT", direction: OUT)
+}
+
+type Document {
+    name: String!
+    owner: User
+}

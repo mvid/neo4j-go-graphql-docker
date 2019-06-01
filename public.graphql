@@ -1,0 +1,17 @@
+type Query {
+    Document: [Document] @addArgumentFromContext(name: "email", contextKey: "email")
+}
+
+schema {
+    query: Query
+}
+
+type User {
+    email: String!
+    documents: [Document]
+}
+
+type Document {
+    name: String!
+    owner: User
+}
