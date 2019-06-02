@@ -1,4 +1,4 @@
-package main
+package graphql
 
 import (
 	"bytes"
@@ -10,7 +10,6 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/jensneuse/graphql-go-tools/pkg/middleware"
 	"github.com/jensneuse/graphql-go-tools/pkg/proxy"
@@ -33,7 +32,7 @@ func setAuthHeader(hs *http.Header) error {
 		return fmt.Errorf("no neo credentials set")
 	}
 
-	b64auth := base64.StdEncoding.EncodeToString([]byte(strings.Replace(authStr, "/", ":", -1)))
+	b64auth := base64.StdEncoding.EncodeToString([]byte(authStr))
 	hs.Set("Authorization", fmt.Sprintf("Basic %s", b64auth))
 
 	return nil
@@ -44,7 +43,7 @@ func getProxy() (*httpproxy.Proxy, error) {
 		return singleton, nil
 	}
 
-	schemaPath, err := filepath.Abs("public.graphql")
+	schemaPath, err := filepath.Rel("app/graphql", "public.graphql")
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +90,7 @@ func InitializeSchema() error {
 	idlURL := hostURL.ResolveReference(idlURLPath)
 
 	// get schema
-	schemaPath, err := filepath.Abs("private.graphql")
+	schemaPath, err := filepath.Rel("app/graphql","private.graphql")
 	if err != nil {
 		return err
 	}

@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/mvid/neo-go-docker/graphql"
 	"github.com/neo4j/neo4j-go-driver/neo4j"
 )
 
@@ -60,12 +61,12 @@ func main() {
 	}
 
 	fmt.Println("initializing graphql")
-	if err := InitializeSchema(); err != nil {
+	if err := graphql.InitializeSchema(); err != nil {
 		panic(err)
 	}
 
 	fmt.Println("starting proxy")
 	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/graphql", Handler)
+	http.HandleFunc("/graphql", graphql.Handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -4,12 +4,12 @@ services:
     ports:
       - "8080:8080"
     build:
-      context: ./
+      context: main/
       dockerfile: Dockerfile
     depends_on:
       - neo4j
     env_file:
-      - .env
+      - main/.env
 
   neo4j:
     image: "neo4j:3.5.3"
@@ -17,6 +17,6 @@ services:
       - "7687:7687"
       - "7474:7474"
     volumes:
-      - ./plugins:/plugins
+      - ./neo4j/plugins:/plugins
     env_file:
-      - .env
+      - neo4j/.env
