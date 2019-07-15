@@ -7,11 +7,13 @@ schema {
 }
 
 type User {
+    uuid: String!
     email: String!
     documents: [Document]
 }
 
 type Document {
+    uuid: String!
     name: String!
     owner: User
 }

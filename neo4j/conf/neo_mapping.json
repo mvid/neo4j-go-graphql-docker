@@ -1,0 +1,19 @@
+{
+  "defaults": {
+    "key-property": "uuid",
+    "nodes_index": "default-index-node",
+    "relationships_index": "default-index-relationship",
+    "include_remaining_properties": true
+  },
+  "node_mappings": [
+    {
+      "condition": "hasLabel('Document')",
+      "type": "documents",
+      "index": "documents",
+      "properties": {
+        "name": "getProperty('name')"
+      }
+    }
+  ],
+  "relationship_mapping": []
+}
