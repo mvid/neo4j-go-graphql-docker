@@ -1,7 +1,7 @@
-FROM golang:1.12-alpine3.9 AS neo-seabolt-go
+FROM golang:1.13-alpine3.11 AS neo-seabolt-go
 
 # dependencies
-RUN apk add --update --no-cache ca-certificates cmake make g++ openssl-dev git curl pkgconfig
+RUN apk add --update --no-cache ca-certificates cmake make g++ libressl-dev openssl-dev git curl pkgconfig
 
 # build seabolt
 RUN git clone -b 1.7 https://github.com/neo4j-drivers/seabolt.git /seabolt

@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "key-property": "uuid",
+    "key_property": "uuid",
     "nodes_index": "default-index-node",
     "relationships_index": "default-index-relationship",
     "include_remaining_properties": true
@@ -15,5 +15,5 @@
       }
     }
   ],
-  "relationship_mapping": []
+  "relationship_mappings": []
 }

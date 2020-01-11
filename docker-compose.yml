@@ -31,7 +31,7 @@ services:
       - "7474:7474"
     volumes:
       - ./neo4j/plugins:/plugins
-#      - ./neo4j/conf:/conf
+      - ./neo4j/conf:/conf
     env_file:
       - neo4j/.env
     depends_on:
